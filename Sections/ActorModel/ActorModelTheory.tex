@@ -10,7 +10,7 @@ The notion of fairness states that all actors are scheduled time to run, and tha
 Location transparency provides an abstraction for the programmers who need to make actors communicate. In the actor model the location of actors does not determine its name. Two actors might run on the same computer in the same core, or they might run on two different machines in two different countries. Location transparent naming enables the programmers no to worry about the actors physical location. \cite{ActorModelPaper}.\\
 Mobility is defined as the ability for a computation to migrate to another node \cite{ActorModelPaper}. This is important for load-balancing, fault-tolerance, and reconfiguration, and is useful in achieving scalable performance \cite{ActorModelPaper} as an actor lifting a lot of heavy work along other actors doing the same on the same machine can seamlessly be moved to another machine in an attempt to alleviate the workload on that machine.
 
-\subsubsection{Synchronization}
+\subsubsection{Synchronization} \label{Synchronization}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\linewidth]{Materials/ActorModel/AMCommunication}
