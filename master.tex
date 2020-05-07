@@ -45,6 +45,12 @@
 	\usepackage{url}
 	\usepackage[nottoc,numbib]{tocbibind}
 	
+	\usepackage{tikz}
+	\usetikzlibrary{trees}
+	\tikzset{level 1/.style={level distance=1.5cm, sibling distance=5cm}}
+	\tikzset{level 2/.style={level distance=1.5cm, sibling distance=2cm}}
+	\tikzset{bag/.style={text width=20em, text centered,yshift=-0.2cm}}
+	
 	\urlstyle{same}
 	\tikzstyle{vertex}=[circle,fill=white!25,minimum size=20pt,inner sep=0pt]
 	\tikzstyle{edge} = [draw,thick,-]
@@ -80,7 +86,7 @@ mutable, if, then, else, cloud, async, static, use, abstract, interface, inherit
   	showstringspaces=false,
   	columns=flexible,
   	basicstyle={\small\ttfamily},
-  	numbers=none,
+  	numbers=left,
   	numberstyle=\tiny\color{gray},
   	keywordstyle=\color{blue},
   	commentstyle=\color{dkgreen},
@@ -227,6 +233,7 @@ Boris \textsc{Düdder}\\
 
 \include{Sections/Introduction}
 \include{Sections/ActorModel/ActorModel}
+\include{Sections/CLS/CLS}
 \include{Sections/TestingTheory/TestingTheory}
 \include{Sections/Bibliography}
 

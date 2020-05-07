@@ -1,0 +1,87 @@
+\section{Combinatory Logic Synthesizer}
+A central part of our work involves the Combinatory Logic Synthesizer (CLS) which is a type based tool to automatically compose larger systems from a given repository consisting of components suited for synthesis. CLS has its roots from combinatory logic synthesis which is a type theoretic approach where a repository of components is used to achieve a synthesis \cite{CLSPaper}. Components are in this approach represented by components which consists of a name and an intersection type. The intersection type both catches the components actual type, but also its semantic type, describing its intended usage \cite{CLSPaper}. We can now look to the relativized inhabitation problem which asks the question: given a repository $\Gamma$ consisting of typed components, and a type we wish to reach, $\tau$, does there exist an inhabitant \textit{e} with type $\tau$ under the type assumptions of $\Gamma$? \cite{CLSPaper} In our work to synthesize a distributed system this is the exact question we would like answered, and it is the question the CLS answers. It is therefore important we understand how the CLS works.
+
+\subsection{Composition synthesis}
+In a type oriented approach types are constructed from constants (a), variables ($\alpha$) or function types ($\tau \to \tau'$) \todo{Wrong arrow. Does it matter?}. Terms can be constructed by using application for instance \textit{e} to \textit{e'}, or by using named components or combinators \cite{CLSPaper}. This can also be viewed as:
+\begin{align*}
+	&\text{Types}\; \tau,\;\tau'\; ::=\; a | \alpha | \tau \to \tau'\\
+	&\text{Terms}\; e,\; e'\; ::= (e\; e') | X
+\end{align*}
+Composition synthesis consists of a single rule in its minimal form. This rule can be viewed logically under the Curry-Howard isomorphism as modus ponens \cite{CLSPaper}:
+\begin{equation*}
+	\frac{\Gamma \vdash F\; : \; \tau' \to \tau \quad \Gamma \vdash G\; : \; \tau'}{\Gamma \vdash (F\; G)\; : \; \tau}
+\end{equation*}\todo{Do we need the var rule?}
+Here we have two premises, that we have a variable \textit{G} in our repository $\Gamma$ of type $\tau'$ and that we have a function type \textit{F} in the same repository which takes a variable of type $\tau'$ to a variable of type $\tau$. If our premises hold, we can then by applying \textit{F} on \textit{G} create a variable in $\Gamma$ of type $\tau$.\\
+We can now formulate the relativized inhabitation problem in a more mathematical sense, as it can be described as:
+\begin{equation*}
+	\exists e.\ \Gamma \vdash e\; : \; \tau?
+\end{equation*}
+Which reads: does there exists a composition \textit{e} in $\Gamma$ such that $\Gamma \vdash e\; : \; \tau$? An inhabitation algorithm is then used to synthesize an \textit{e} from $\Gamma$ and $\tau$. This makes the foundation of automatic synthesis \cite{CLSPaper}.
+
+\subsection{Example of combinatory logic synthesis}
+As an example of combinatory logic synthesis we can look at how our repository for the player object looks at time of writing (May 7, 2020). Our repository consists of nine functions based in four categories. At the top level we have a PlayerGrain which takes three strings into a MyResult object which is the native class we are looking for in our synthesis. We then have three ability functions, which each produces the string needed to synthesize that ability. The next three functions are then the case implementations needed to call the functions when the game is running. Lastly we have two functions which produces two different ways for the player to take damage. The repository can be seen in \autoref{playerRepo}.
+\begin{figure}[H]
+	\centering
+	\begin{alignat*}{2}
+	&\text{PlayerGrain}\; &&\text{: string, string, string} \to \text{MyResult}\\
+	&\text{abilityFireball}\; &&\text{: void} \to \text{string}\\
+	&\text{abilityRoar}\; &&\text{: void} \to \text{string}\\
+	&\text{abilityNone}\; &&\text{: void} \to \text{string}\\
+	&\text{caseFireball}\; &&\text{: void} \to \text{string}\\
+	&\text{caseRoar}\; &&\text{: void} \to \text{string}\\
+	&\text{caseNone}\; &&\text{: void} \to \text{string}\\
+	&\text{damageTakenRoar}\; &&\text{: void} \to \text{string}\\
+	&\text{damageTakenStandard}\; &&\text{: void} \to \text{string}
+	\end{alignat*}
+	\caption{The functions which make up the player repository at time of writing.}
+	\label{playerRepo}
+\end{figure}
+
+Although \autoref{playerRepo} gives an overview of what has been implemented and it is possible to some extend to guess how these functions are grouped, semantic information seems to be missing. Just looking at our repository does not show very clearly, if at all, how the ability, case and damageTaken functions make three groups which makes a player. To show the semantics of our repository we make a taxonomy of it as seen in \autoref{taxonomy}. We here define dashed lines as a 'has a' relation and solid lines as a 'is a' relation. This means that player has a case, ability and a damageTaken component which each can take different forms. What we can not see in this representation is the 'horizontal' correlation between components. If the player has a fireball ability, the player needs to implement the fireball case and the standard damageTaken. Although this can not be seen, in the implementation these correlations has been made with kindings.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[grow=down, -stealth]
+	\hspace{-2cm}
+	\node[bag]{Player} 
+	child[dashed]{;\node[bag]{Case}
+		child[solid]{; \node[bag]{None}}
+		child[solid]{; \node[bag]{Fireball}}
+		child[solid]{; \node[bag]{Roar}}
+	}
+	child[dashed]{;\node[bag]{Ability}
+		child[solid]{; \node[bag]{None}}
+		child[solid]{; \node[bag]{Fireball}}
+		child[solid]{; \node[bag]{Roar}}
+	}
+	child[dashed]{;\node[bag]{DamageTaken}
+		child[solid]{; \node[bag]{Standard}}
+		child[solid]{; \node[bag]{Roar}}
+	};
+	\end{tikzpicture}
+	\caption{Taxonomy describing semantics about the player repository at time of writing.}
+	\label{taxonomy}
+\end{figure}
+
+A central idea to the CLS is to combine semantic information together with the actual types when creating a repository \cite{CLSPaper}. We can do this by intersecting the repository in \autoref{playerRepo} with the taxonomy from \autoref{taxonomy}. This will add the missing semantic information we were looking for when we looked at the repository by itself. By intersecting native classes with semantic information we get the new repository in \autoref{intersectionRepo}.
+\begin{figure}[H]
+	\centering
+	\begin{alignat*}{2}
+	&\text{PlayerGrain}\; &&\text{: string $\cap$ case, string $\cap$ ability, string $\cap$ damageTaken} \to \text{MyResult $\cap$ player}\\
+	&\text{abilityFireball}\; &&\text{: void} \to \text{string $\cap$ ability}\\
+	&\text{abilityRoar}\; &&\text{: void} \to \text{string $\cap$ ability}\\
+	&\text{abilityNone}\; &&\text{: void} \to \text{string $\cap$ ability}\\
+	&\text{caseFireball}\; &&\text{: void} \to \text{string $\cap$ case}\\
+	&\text{caseRoar}\; &&\text{: void} \to \text{string $\cap$ case}\\
+	&\text{caseNone}\; &&\text{: void} \to \text{string $\cap$ case}\\
+	&\text{damageTakenRoar}\; &&\text{: void} \to \text{string $\cap$ damageTaken}\\
+	&\text{damageTakenStandard}\; &&\text{: void} \to \text{string $\cap$ damageTaken}
+	\end{alignat*}
+	\caption{The functions together with semantic information which make up the player repository at time of writing.}
+	\label{intersectionRepo}
+\end{figure}
+
+With this new repository we can now find a meaningful composition which returns a player with a fireball ability by constructing the inhabitant \textit{PlayerGrain(caseFireball(), abilityFireball(), damageTakenStandard())} of type MyResult $\cap$ player. More formally we can call the repository from \autoref{intersectionRepo} $\Gamma$, and the composition thus becomes:
+\begin{equation*}
+	\Gamma \vdash \textit{PlayerGrain(caseFireball(), abilityFireball(), damageTakenStandard())}\; :\; \textit{MyResult}\cap \textit{player}
+\end{equation*}
