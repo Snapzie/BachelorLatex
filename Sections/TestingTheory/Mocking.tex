@@ -1,0 +1,12 @@
+\subsection{Test Doubles}
+%Test doubles / isolation
+%Moq framework +example
+The way our code is written, we have a certain focus on the room, wherein the other actors may reside. This means that a lot of the methods requires a specified room, to know where and what to look for. In short, we have high coupling between our classes. However, in unit testing, we wish to perform tests of each class in isolation, independently of the other classes. So, if we have high coupling, and yet want to test classes independently, how are we to do this? \\ This is where test doubles come in. Using test doubles, also known as scaffolding, is the means of making it easier to isolate code for testing. The point of a test double is to act as a class, including some of its functionality, so that it can be used by another class that is being tested\cite{TestingCodeComplete}. There are various test doubles available, such as fakes, dummies and mocks. Since mocking is what we are going to use, this is what we will look more into.
+
+\subsubsection{Mocking}
+The idea of mocking, or mock objects, is to mimic the behaviour of the real class we are imitating. However, we can do this in a controlled way, such that the methods of the mimicked class returns some specific values, independently of the input they receive. This means that the class will not produce any specific results based on their real implementation, but predefined output that we specify\cite{TestingAdaptiveCode}. As such, if we have a class we want to test, that is dependent on the class we mimic, we can now replace the dependency with our mimicked class. Now we have isolated the class we want to test, as all interactions with the mimic is controlled. \\
+\\
+To mimic the behaviour of a real class it would require us to make a new class. For each class we would like to mimic, we would have to make seperate classes for. This does not only mean that we would need a lot of extra code just for our unit tests, but also that if we were to change the actual class, we would have to change the mimic. This could, potentionally, become tedious work. To get around this, we make use of a framework, that enables us to make the mock objects dynamically.
+
+\subsubsection{Moq Framework}
+This will serve as a short introduction to the Moq framework and how we use it in our testing.
