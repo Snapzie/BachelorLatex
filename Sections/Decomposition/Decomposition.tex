@@ -42,16 +42,6 @@ We previously discussed how we could avoid using the semantic type \textit{'dama
 
 The player fulfilled the purpose of being an entity with timers. When synthesising the abilities we also include code for timers for the two possible abilities. We can thus say that we successfully can synthesize actor code which uses timers. However, these timers are very simple. They do not require disposing as the player only seizes to exist when the program is closed. Further, these timers are never recurring, so they only fire when the player asks them to. This essentially means that our only consideration with timers for the player is the abilities cool downs (the time before we can use the ability again, because being able to use the abilities repeatedly would make the player way too strong).  
 
-
-\subsubsection{In conclusion}
-\begin{itemize}
-	\item Summerize the components of a player - case, ability and DamageTaken
-	\item Allowing DamageTaken could lead to easier extension?
-	\item How could it look? - case and ability
-	\item How did we use kinding?
-	\item Have not discussed how players use timers
-\end{itemize}   
-
 \subsection{Room}
 \begin{itemize}
 	\item Dependency injection of weather effect objects.
