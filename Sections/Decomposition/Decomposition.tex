@@ -20,14 +20,7 @@ Throughout development we found that the coupling between the oldest objects we 
 	\item 'abuse' strings and make it dynamic
 \end{itemize}
 
-\subsection{Decomposition}
-\begin{itemize}
-	\item What is a good component?
-	\item Did we succeed in creating good components?
-	\item One-liners are not themselves meaningful, but they are in the bigger picture.
-\end{itemize}
+\input{Sections/Decomposition/Components}
 
 \subsection{Future work}
-\begin{itemize}
-	\item How well does Orleans go with CLS? Orleans best practices: 'Consider Orleans when you have: Significant number of loosely coupled entities.' Seems to fit CLS. 
-\end{itemize}
+In future work with the CLS and Orleans we cannot put enough emphasis on how important a good solid design is. When we began learning about the CLS we thought it would eliminate the need for dependency injection, we just replace code so why make a socket for it? After working on this project we now understand the importance and we understand that the CLS does not replace any already existing software engineering principles, on the contrary, using the CLS makes it much more important to follow them. Both the CLS and Orleans strive to work with encapsulated and isolated code which has no to little coupling with other entities, and so they both seem and feel to be a great match together, also for future projects.
