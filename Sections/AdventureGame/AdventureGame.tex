@@ -1,4 +1,4 @@
-\section{The adventure game}
+\section{The adventure game} \label{adventureGame}
 In our work with the CLS we have been working on creating an adventure game where the CLS would allow us to create different variations of the game based on the repository of code we have built. We have not built the game from the ground up, but instead we have taken a demo project from the Orleans documentation \cite{AdventureGame} and extended it. This was done to save development time and thus to reach a point where we could begin creating combinators faster and have a more 'real world'-like system to work with. The original system involved players, monsters and rooms where all players and monsters would have one health. Things or items were scattered across the rooms and the player could pick them up. Most noticeably is the knife which allows a player to stab other players or monsters. The player and monsters could then move around the rooms, but the monsters would never attack \todo{lidt meh, men flertal?}. The game had no objective and no way to win. It served as a 'sandbox' project. There were other smaller implementations which were part of the original game, but because these have little to no relevance to our project we will leave them out of this overview.\\
 The first extension to the game was the addition of health for both the player and monsters. This allowed us to interact in a more fine grained manner with the monsters, and opened up the possibilities of adding abilities to the player. We also extended the monster such that it would attack the player. These two additions makes our foundation for the game, and is what we would like to call our \textit{initial application} as everything else we have created revolves around this foundation.\\
 
@@ -22,6 +22,23 @@ If we look at the communication between the boss and the monsters it is only one
 	\caption{A sequence diagram showing the communication needed for the player to fireball a monster.}
 	\label{PLayerFireballFlow}
 \end{figure}
+
+As a short introduction to the testing we have done on the adventure game, we would like to provide an overview of the tests done. We have used a table for this, as can be seen in \autoref{tableTests}. The table showcases the number of tests done for each of the unit and integration tests. We will venture deeper into our tests in \autoref{testingDisc}\todo{andet?}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{| c | c |} \hline
+		\textbf{Name} & \textbf{No. of Tests} \\ \hline
+		PlayerTests & 30 \\ \hline
+		RoomTests & 21 \\ \hline
+		WeatherEffectTests & 4 \\ \hline
+		BossTests & 4 \\ \hline
+		MonsterIntegrationTests & 2 \\ \hline
+		PlayerIntegrationTests & 17 \\ \hline
+		BossIntegrationTests & 12 \\ \hline
+	\end{tabular}
+	\caption{The number of tests for each grain and connection. Note that this includes tests for all variations, i. e., all abilities and variations are present.}
+	\label{tableTests}
+\end{table}
 
 \subsection{Metaprogramming} \label{Metalanguage}
 We have already talked about what variations are possible to create, but we have not gone into detail about how to achieve them. To create the variation of our adventure game we want, we need a \textit{'reference client'}, a template for what the CLS should be looking for.
