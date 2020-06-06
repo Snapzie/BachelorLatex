@@ -1,17 +1,4 @@
 \section{Introduction}
-In this thesis we have extended upon a sandbox like demo project from Microsoft \cite{AdventureGame} which resembles an adventure game and is written in a distributed fashion with Orleans. We have then decomposed it into a code repository with the  purpose of using the Combinatory Logic Synthesizer, a type based tool to automatically compose larger systems from a repository of code components, to create different variations of the game based on definitions written in a metalanguage. Our goal has been to synthesize code with timers, synthesizing code where we dispose timers, synthesizing code where we create other actors and to be able to define a list of parameters in our metalanguage and then synthesize code where only the defined parameters are present in the game variation. Our goal has also been to test our application, both as the initial program as well as the combinated variations of the game. This means synthesizing tests in the same way as our code, such that a given variation has tests alongside the program specific to that variation. 
-\todo{Extend introduction to introduce testing?}\\
+In this thesis we have extended upon a sandbox-like demo project from Microsoft \cite{AdventureGame} which resembles an adventure game and is written in a distributed fashion with Orleans. We have then decomposed it into a code repository with the  purpose of using the Combinatory Logic Synthesizer, a type based tool to automatically compose larger systems from a repository of code components, to create different variations of the game based on definitions written in a metalanguage. Our goal has been to synthesize code with timers, synthesizing code where we dispose timers, synthesizing code where we create other actors and to be able to define a list of parameters in our metalanguage and then synthesize code where only the defined parameters are present in the game variation. Our goal has also been to test our application, both as the initial program as well as the combinated variations of the game. This means synthesizing tests in the same way as our code, such that a given variation has tests alongside the program specific to that variation. \\
 We will begin by looking at the theory behind the actor model and Orleans, then we will move to the theory of the Combinatory Logic Synthesizer and how it works. After that we will look into more detail about the extensions we have made to the Microsoft project. We will then look into the design decisions about decomposing the code, the issues we faced and what improvements we could have made. We will also look into what makes a good component and ask ourselves if we have achieved good decomposition. 
-Then we will look into the relevant theory of testing software, followed by a deeper dive into our testing, meaning the tests themselves alongside the tests as combinators in the CLS. We will be discussing our implementation and looking at some of the obstacles we faced during our process of creating tests\todo{Change for a more comprehensive description}. We will then comment on our results and lastly make our conclusions.
-\begin{itemize}
-	\item Abstract
-	\item Introduction
-	\item Actor model - 4
-	\item CLS - 4
-	\item Our product - 4
-	\item Discussion of implementation - 12
-	\item Testing theory - 4
-	\item Discussion of testing - 12
-	\item Results - 4
-	\item Conclusion
-\end{itemize}
+Then we will look into the relevant theory of testing software, followed by a deeper dive into our testing, meaning the tests themselves alongside the tests as combinators in the CLS. We will be discussing our implementation and looking at some of the obstacles we faced during our process of creating tests. We will then comment on our results and lastly make our conclusions.
