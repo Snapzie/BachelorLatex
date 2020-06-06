@@ -10,7 +10,7 @@ In a type oriented approach types are constructed from constants (a), variables 
 Composition synthesis consists of a single rule in its minimal form. This rule can be viewed logically under the Curry-Howard isomorphism as modus ponens \cite{CLSPaper}:
 \begin{equation*}
 	\frac{\Gamma \vdash F\; : \; \tau' \to \tau \quad \Gamma \vdash G\; : \; \tau'}{\Gamma \vdash (F\; G)\; : \; \tau}
-\end{equation*}\todo{Do we need the var rule?}
+\end{equation*}
 Here we have two premises, that we have a variable \textit{G} in our repository $\Gamma$ of type $\tau'$ and that we have a function type \textit{F} in the same repository which takes a variable of type $\tau'$ to a variable of type $\tau$. If our premises hold, we can then by applying \textit{F} on \textit{G} create a variable in $\Gamma$ of type $\tau$.\\
 We can now formulate the relativized inhabitation problem in a more mathematical sense, as it can be described as:
 \begin{equation*}
