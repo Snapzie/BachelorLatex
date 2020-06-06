@@ -24,7 +24,7 @@ To alter the variation we synthesize we need to look at a concrete class which e
 	\caption{We see that the player with the knife can attack the Angry Customer.}
 	\label{sc1}
 \end{wrapfigure}
-In the following we will showcase that the initial application can be synthesized and played. Here we are focusing on \autoref{sc1}, \autoref{sc2} and \autoref{sc3}. As we start the game we see that we can not hit other players in the room with us. This is because we need the knife to attack with, as we do not have the fireball in the initial application. With the knife we can now begin stabbing both other players, but also the evil customer monster. The concept for hitting the 'Wicked Witch' is the same, but here we need the water. As this is all there is to the game in the initial application, our showcase of the initial application is done.
+In the following we will showcase that the initial application can be synthesized and played. Here we are focusing on \autoref{sc1}, \autoref{sc2} and \autoref{sc3}. As we start the game we see that we cannot hit other players in the room with us. This is because we need the knife to attack with, as we do not have the fireball in the initial application. With the knife we can now begin stabbing both other players, but also the evil customer monster. The concept for hitting the 'Wicked Witch' is the same, but here we need the water. As this is all there is to the game in the initial application, our showcase of the initial application is done.
 
 \begin{figure}[H]
 	\centering
@@ -44,15 +44,15 @@ But to show off the weather effects and the boss, we have provided to more showc
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.6\linewidth]{example-image-a}
-	\caption{We see that we cannot attack other players without having the knife.}
+	\includegraphics[width=0.6\linewidth]{example-image-c}
+	\caption{We here see the effect of one the possible weathers.}
 	\label{sc4}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\linewidth]{example-image-a}
-	\caption{We see that the player with the knife can attack other players.}
+	\caption{We here see the player fighting the boss.}
 	\label{sc5}
 \end{figure}
 
@@ -63,9 +63,9 @@ But to show off the weather effects and the boss, we have provided to more showc
 	\label{PlayerUnitInit}
 \end{wrapfigure} 
 Let us look at the results when it comes to testing. We have succeeded in creating the variations as explained above, including the corresponding tests. We add the tests as an individual job in the AdventureGameController. For instance, we can see in \autoref{Controller} how we both have a job for semanticPlayerTarget as well as semanticPlayerTestTarget. These are the player unit tests. \\
-To test the initial application this way, we would need to synthesize it first. If we look at \autoref{version1}, we can set the different variables that create our variations of the game. In the case of the initial application, we would then have to set both setAbility and setBoss to their none types, as well as an empty setWeather\todo{ye?}.
-In \autoref{PlayerUnitInit} we can see an example of one of the test suites run in the synthesized initial application, which is the player unit tests. These tests that appear in the initial application, without any variation will thus also appear in every variation of the game, meaning that variation only adds more tests. Earlier in the thesis, we have often referred to these as the essential tests because of this.
+To test the initial application this way, we would need to synthesize it first. If we look at \autoref{version1}, we can set the different variables that create our variations of the game. In the case of the initial application, we would then have to set both setAbility and setBoss to their none types, as well as an empty setWeather.
+In \autoref{PlayerUnitInit} we can see an example of one of the test suites run in the synthesized initial application, which is the player unit tests. These tests that appear in the initial application, without any variation will thus also appear in every variation of the game, meaning that variation only adds more tests. Earlier in the thesis, we have referred to these as the essential tests because of this.
 As we can see, all these tests succeeded, except the TakeDamage test. We went over why this test does not succeed in the subsection \nameref{getPrimaryKey}. We can also compare this figure to our table \autoref{tableTests} and see how, unsurprisingly, the initial application of course contains fewer player unit tests than in the table. This is because the table contains the total number of tests, meaning all of them across the different variations. With this, we have successfully synthesized and run the tests for the initial application. Again, this does mean that some of the tests cannot run, but as with TakeDamage, this is not due to any fault in synthesizing of the grains or tests, but rather a fault in the tests themselves. That is, the TakeDamage test, for instance, did not run before synthesizing it either. \\
 It should also be mentioned that while we do not have a boss in the initial application, bossTests and bossIntegrationTests are still created, but they are empty, they do not contain any code or tests. This is due to the nature of combinators, where we combinate empty boss files when a boss is not present. \\
-Now that we have seen the synthesizing of the initial application was a success, we can check other variations of the game and see how the tests react to this. For instance, if we keep the same setup as the initial application, but we apply the fireball to the player, we can see how the tests change. If we look at the player unit tests as we did with the initial application, we can see how this variation with fireball contains the same tests with new ones added. With this variation, all the fireball tests have been added except one. This is the FireballTestBoss, that was not combinated due to the boss not being present. If we compare the player fireball variation to our initial variation's player unit tests in \autoref{PlayerUnitInit}, we now have 25 tests instead of 21. 4 of our 5 fireball tests have thus been added, where the fifth as mentioned was the FireballTestBoss. Thus, we have been successful in synthesizing tests such that the correct tests are included in the different variations. %\\
+Now that we have seen the synthesizing of the initial application was a success, we can check other variations of the game and see how the tests react to this. For instance, if we keep the same setup as the initial application, but we apply the fireball to the player, we can see how the tests change. If we look at the player unit tests again, we can see how this variation with fireball contains the same tests with new ones added. With this variation, all the fireball tests have been added except one. This is the FireballTestBoss, that was not combinated due to the boss not being present. If we compare the player fireball variation to our initial variation's player unit tests in \autoref{PlayerUnitInit}, we now have 25 tests instead of 21. 4 of our 5 fireball tests have thus been added, where the fifth as mentioned was the FireballTestBoss. Thus, we have been successful in synthesizing tests such that the correct tests are included in the different variations. %\\
 %At last we should mention that while the synthesization was successful, we did not manage to make all the tests run, due to flaws in the our creation of them. However, while TakeDamageTest fails consistently, 
