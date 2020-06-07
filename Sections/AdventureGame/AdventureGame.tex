@@ -12,7 +12,7 @@ The room has been extended with weather effects. We have created four different 
 	\caption{UML class diagram of the adventure game with all extensions available.}
 	\label{UML}
 \end{figure}
-In \autoref{UML} we see an UML class diagram for the whole game with all extensions. We see that there is quite high coupling between the room and the other actors, and in general a lot of communication the actors in-between. The room object works as a mediator object, and holds information about everyone in the room. The other objects do not know of each other, but instead asks the room if a player or specific monster is in the room with them. Because of this, the room will receive a lot of communication as for all tasks involving more than one actor, the room will be prompted. However, as there are a lot of rooms, we can not talk about a bottleneck. If we were to scale the game with a lot of players and monsters, we would likely scale the number of rooms proportionally, and so there will not be a lot of communication to one specific instantiation. In addition, the communication with the room is in general short, for instance when a player wants to fireball a monster. In \autoref{PLayerFireballFlow} we see a sequence diagram of a player using fireball on a monster. The player first asks the room to find players of the target's name, as there are none, the player then asks for monsters of the same name. This time there is one and the player can then tell the monster to take damage. As we see these lookups are only calls to a single function, and thus the communication is short.\\
+In \autoref{UML} we see an UML class diagram for the whole game with all extensions. We see that there is quite high coupling between the room and the other actors, and in general a lot of communication the actors in-between. The room object works as a mediator object, and holds information about everyone in the room. The other objects do not know of each other, but instead asks the room if a player or specific monster is in the room with them. Because of this, the room will receive a lot of communication as for all tasks involving more than one actor, the room will be prompted. However, as there are a lot of rooms, we can not talk about a bottleneck. If we were to scale the game with a lot of players and monsters, we would likely scale the number of rooms proportionally, and so there will not be a lot of communication to one specific instantiation. In addition, the communication with the room is in general short, for instance when a player wants to fireball a monster. In \autoref{PLayerFireballFlow} we see a sequence diagram of a player using fireball on a monster. The player first asks the room to find players of the target's name, as there are none, the player then asks for monsters of the same name. This time there is one and the player can then tell the monster to take damage. As we see, these lookups are only calls to a single function, and thus the communication is short.\\
 If we look at the communication between the boss and the monsters it is only one way. The boss holds its own list of monsters it has spawned and thus does not need to prompt the room for what monsters are present. The room does however communicate to the boss when a monster dies in the room such that it can update its list. The boss can now go through its list of monsters and for each one tell it to heal. The boss does only have communication with monsters it spawns, not with the monsters found around the world.\\
 
 \begin{figure}[H]
@@ -22,7 +22,7 @@ If we look at the communication between the boss and the monsters it is only one
 	\label{PLayerFireballFlow}
 \end{figure}
 
-As a short introduction to the testing we have done on the adventure game, we would like to provide an overview of the tests done. We have used a table for this, as can be seen in \autoref{tableTests}. The table showcases the number of tests done for each of the unit and integration tests. We will venture deeper into our tests in \autoref{testingDisc}\todo{andet? Total?}
+As a short introduction to the testing we have done on the adventure game, we would like to provide an overview of the tests done. We have used a table for this, as can be seen in \autoref{tableTests}. The table showcases the number of tests done for each of the unit and integration tests. We will venture deeper into our tests in \autoref{testingDisc}
 \begin{table}[H]
 	\centering
 	\begin{tabular}{| c | c |} \hline
@@ -34,6 +34,7 @@ As a short introduction to the testing we have done on the adventure game, we wo
 		MonsterIntegrationTests & 2 \\ \hline
 		PlayerIntegrationTests & 17 \\ \hline
 		BossIntegrationTests & 12 \\ \hline
+		Total & 90 \\ \hline
 	\end{tabular}
 	\caption{The number of tests for each grain and connection. Note that this includes tests for all variations, i. e., all abilities and variations are present.}
 	\label{tableTests}
