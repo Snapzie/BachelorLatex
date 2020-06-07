@@ -2,7 +2,7 @@
 %Integration
 %State testing?
 Testing is a quality-improvement activity meant for detecting errors in the software you write, meaning error detection, however it may sometimes falsely be referred to as "debugging" \cite{TestingCodeComplete}. Testing is a large topic, that spans way beyond testing during development, meaning it may be in place to specify our scope of testing. \\
-We will look and describe the two testing areas that we have performed. While software is tested in a number of ways, we will solely look at unit testing and integration testing. \\%meh
+We will look at and describe the two testing areas that we have performed. While software is tested in a number of ways, we will solely look at unit testing and integration testing. \\%meh
 Unit testing is the testing of a single routine, class or small program, in isolation from the rest of the system. This is to ensure that the individual classes and their methods work as intended, without any dependencies\cite{TestingCodeComplete}.
 Integration, on the other hand, is testing of two or more routines, classes, etc. After unit testing, we know the individual classes or components work in isolation. Integration testing is the testing of the connection and interaction between the classes, such that we ensure the system works in unison. \\
 Unit testing is performed before the integration tests, as to ensure the individual classes work, before testing them all together. If we used integration test first, and a given test failed, we would not know whether the fault was in a specific method or the communication between classes. \\

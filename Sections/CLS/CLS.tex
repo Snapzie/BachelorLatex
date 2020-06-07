@@ -16,10 +16,10 @@ We can now formulate the relativized inhabitation problem in a more mathematical
 \begin{equation*}
 	\exists e.\ \Gamma \vdash e\; : \; \tau?
 \end{equation*}
-Which reads: does there exists a composition \textit{e} in $\Gamma$ such that $\Gamma \vdash e\; : \; \tau$? An inhabitation algorithm is then used to synthesize an \textit{e} from $\Gamma$ and $\tau$. This makes the foundation of automatic synthesis \cite{CLSPaper}.
+Which reads: does there exist a composition \textit{e} in $\Gamma$ such that $\Gamma \vdash e\; : \; \tau$? An inhabitation algorithm is then used to synthesize an \textit{e} from $\Gamma$ and $\tau$. This makes the foundation of automatic synthesis \cite{CLSPaper}.
 
 \subsection{Example of combinatory logic synthesis}
-As an example of combinatory logic synthesis we can look at how our repository for the player object looks at time of writing (May 7, 2020). Our repository consists of nine functions based in four categories. At the top level we have a PlayerGrain which takes three strings into a MyResult object which is the native class we are looking for in our synthesis. We then have three ability functions, which each produces the string needed to synthesize that ability. The next three functions are then the case implementations needed to call the functions when the game is running. Lastly we have two functions which produces two different ways for the player to take damage. The repository can be seen in \autoref{playerRepo}.
+As an example of combinatory logic synthesis we can look at how our repository for the player object looks at time of writing (May 7, 2020). Our repository consists of nine functions based in four categories. At the top level we have a PlayerGrain which takes three strings into a MyResult object which is the native class we are looking for in our synthesis. We then have three ability functions, each producing the string needed to synthesize that ability. The next three functions are then the case implementations needed to call the functions when the game is running. Lastly we have two functions which produce two different ways for the player to take damage. The repository can be seen in \autoref{playerRepo}.
 \begin{figure}[H]
 	\centering
 	\begin{alignat*}{2}
